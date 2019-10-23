@@ -1,10 +1,10 @@
+
+import cv2
+import os
 import numpy as np
 import random
 import pickle
 import matplotlib.pyplot as plt
-%matplotlib inline
-import cv2
-import os
 from tqdm import tqdm
 import tensorflow as tf
 from tensorflow import keras
@@ -12,6 +12,7 @@ from keras.models import Sequential
 from keras.layers import Activation, Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from keras.callbacks import TensorBoard
 import time
+%matplotlib inline
 
 DIR='C:/Users/Asus/Downloads/ML DATASETS/Dogs Vs Cats/'
 CATEGORIES = ['dog', 'cat']
@@ -21,14 +22,14 @@ IMG_SIZE = 100
 for img in tqdm(os.listdir(train_path)):
     label = img.split('.')[0]
     img_array = cv2.imread(os.path.join(train_path, img), cv2.IMREAD_GRAYSCALE)
-    plt.imshow(img_array, cmap='red')
+    plt.imshow(img_array, cmap='cyan')
     plt.show()
     break
 
 print(img_array)
 
 new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE), 1)
-plt.imshow(new_array, cmap="red")
+plt.imshow(new_array, cmap="cyan")
 plt.show()
 
 training_data = []
@@ -97,7 +98,6 @@ def prepare(filepath):
     image_array=cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
     new_img = cv2.resize(image_array, (IMG_SIZE, IMG_SIZE))
     return new_img.reshape(-1, IMG_SIZE, IMG_SIZE, 1)
-
 prediction=model.predict([prepare('D:\250px-Gatto_europeo4.jpg')])
 print(predict[int(prediction[0][0])])
    
